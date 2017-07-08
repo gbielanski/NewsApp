@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity
     private static final int LOADER_ID = 1234;
     private RecyclerView mRecyclerView;
     private NewsAdapter mAdapter;
+    private TextView mEmptyNewsList;
+    private ProgressBar mPregressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,9 @@ public class MainActivity extends AppCompatActivity
         mAdapter = new NewsAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        TextView emptyNewsList = (TextView) findViewById(R.id.empty_news_list_text_view);
+        mEmptyNewsList = (TextView) findViewById(R.id.empty_news_list_text_view);
 
+        mPregressBar = (ProgressBar)findViewById(R.id.progress_bar);
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -47,15 +51,16 @@ public class MainActivity extends AppCompatActivity
                 activeNetwork.isConnectedOrConnecting();
 
         if (isConnected) {
-            emptyNewsList.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-            emptyNewsList.setText(getString(R.string.no_news_data));
+            mEmptyNewsList.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
+            mPregressBar.setVisibility(View.VISIBLE);
             //if (!savedSearchString.isEmpty()) {
             getLoaderManager().restartLoader(LOADER_ID, null, this).forceLoad();
         } else {
-            emptyNewsList.setVisibility(View.VISIBLE);
+            mEmptyNewsList.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
-            emptyNewsList.setText(getString(R.string.no_connection));
+            mPregressBar.setVisibility(View.GONE);
+            mEmptyNewsList.setText(getString(R.string.no_connection));
         }
     }
 
@@ -66,8 +71,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> newsList) {
-        mAdapter.addNewsData(newsList);
+        mPregressBar.setVisibility(View.GONE);
 
+        if(!newsList.isEmpty()) {
+            mEmptyNewsList.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mAdapter.addNewsData(newsList);
+        } else {
+            mEmptyNewsList.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyNewsList.setText(getString(R.string.no_news_data));
+        }
     }
 
     @Override

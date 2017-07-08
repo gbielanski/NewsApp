@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context="pl.gbielanski.newsapp.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"/>
     <TextView
         android:id="@+id/empty_news_list_text_view"
         android:layout_width="match_parent"
