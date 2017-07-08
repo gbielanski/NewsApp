@@ -2,8 +2,6 @@ package pl.gbielanski.newsapp;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.content.Loader;
-
 import java.net.URL;
 import java.util.List;
 

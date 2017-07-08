@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
-    ArrayList<News> mNewsData = new ArrayList<>();
-    private OnClickNewsHandler mOnClickNewsHandler;
+    private ArrayList<News> mNewsData = new ArrayList<>();
+    final private OnClickNewsHandler mOnClickNewsHandler;
 
-    public NewsAdapter(OnClickNewsHandler onClickNewsHandler) {
+    NewsAdapter(OnClickNewsHandler onClickNewsHandler) {
         this.mOnClickNewsHandler = onClickNewsHandler;
     }
 

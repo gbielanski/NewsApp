@@ -11,18 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapter.OnClickNewsHandler {
 
-    public static final int LOADER_ID = 1234;
-    RecyclerView mRecyclerView;
-    NewsAdapter mAdapter;
+    private static final int LOADER_ID = 1234;
+    private RecyclerView mRecyclerView;
+    private NewsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
