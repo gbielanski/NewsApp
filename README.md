@@ -1,6 +1,6 @@
 # NewsApp
 
-Before use add your api key as /res/xml/guardian_api_key.xml
+Before use add your api key as /res/values/guardian_api_key.xml
 
     <?xml version="1.0" encoding="utf-8"?>
     <resources xmlns:android="http://schemas.android.com/apk/res/android">
