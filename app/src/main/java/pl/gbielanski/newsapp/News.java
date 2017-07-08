@@ -4,29 +4,29 @@ package pl.gbielanski.newsapp;
 class News {
     private String mTitle;
     private String mSection;
-    private String mAuthor;
     private String mDate;
+    private String mArticleUrl;
 
-    public News(String title, String section, String author, String date) {
+    public News(String title, String section, String date, String articleUrl) {
         this.mTitle = title;
         this.mSection = section;
-        this.mAuthor = author;
         this.mDate = date;
+        this.mArticleUrl = articleUrl;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return mTitle;
     }
 
-    public String getSection() {
+    String getSection() {
         return mSection;
     }
 
-    public String getAuthor() {
-        return mAuthor;
+    String getDate() {
+        return mDate;
     }
 
-    public String getDate() {
-        return mDate;
+    public String getArticleUrl() {
+        return mArticleUrl;
     }
 }

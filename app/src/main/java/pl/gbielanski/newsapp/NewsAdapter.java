@@ -1,7 +1,6 @@
 package pl.gbielanski.newsapp;
 
 import android.content.Context;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     ArrayList<News> mNewsData = new ArrayList<>();
+    private OnClickNewsHandler mOnClickNewsHandler;
+
+    public NewsAdapter(OnClickNewsHandler onClickNewsHandler) {
+        this.mOnClickNewsHandler = onClickNewsHandler;
+    }
+
+    interface OnClickNewsHandler{
+        void newsOnClick(int position);
+    }
 
     @Override
     public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,15 +35,19 @@ class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     @Override
     public void onBindViewHolder(NewsHolder holder, int position) {
         News news = mNewsData.get(position);
-        holder.mAuthor.setText(news.getAuthor());
         holder.mSection.setText(news.getSection());
         holder.mTitle.setText(news.getTitle());
         holder.mDate.setText(news.getDate());
+        holder.itemView.setTag(news.getArticleUrl());
     }
 
-    public void addNewsData(ArrayList<News> newsList){
-        mNewsData = newsList;
+    public void addNewsData(List<News> newsList){
+        mNewsData = (ArrayList<News>) newsList;
         notifyDataSetChanged();
+    }
+
+    public List<News> getNewsData(){
+        return mNewsData;
     }
 
     @Override
@@ -42,19 +55,23 @@ class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
         return mNewsData.size();
     }
 
-    public class NewsHolder extends RecyclerView.ViewHolder{
+    public class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView mTitle;
         TextView mSection;
-        TextView mAuthor;
         TextView mDate;
 
         public NewsHolder(View itemView) {
             super(itemView);
             mTitle  = (TextView)itemView.findViewById(R.id.article_title);
             mSection  = (TextView)itemView.findViewById(R.id.article_section);
-            mAuthor  = (TextView)itemView.findViewById(R.id.article_author);
             mDate  = (TextView)itemView.findViewById(R.id.article_date);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnClickNewsHandler.newsOnClick(getAdapterPosition());
         }
     }
 }
