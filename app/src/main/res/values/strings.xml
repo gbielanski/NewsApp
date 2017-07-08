@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">News App</string>
+    <string name="no_news_data">No news data</string>
 </resources>
