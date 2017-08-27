@@ -13,4 +13,4 @@ app/app-release.apk
 app/app-release_minified.apk
 app/libs/
 app/src/main/res/drawable/
-/app/src/main/res/guardian_api_key.xml 
+app/src/main/res/values/guardian_api_key.xml
