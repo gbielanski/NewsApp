@@ -7,4 +7,9 @@
 /build
 /captures
 .externalNativeBuild'
-/app/src/main/res/xml/guardian_api_key.xml
+/app/src/main/res/values/guardian_api_key.xml
+.idea/vcs.xml
+app/app-release.apk
+app/app-release_minified.apk
+app/libs/
+app/src/main/res/drawable/
