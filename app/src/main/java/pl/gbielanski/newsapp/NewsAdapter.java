@@ -1,6 +1,7 @@
 package pl.gbielanski.newsapp;
 
 import android.content.Context;
+import android.support.annotation.Keep;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+@Keep
 class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     private ArrayList<News> mNewsData = new ArrayList<>();
     final private OnClickNewsHandler mOnClickNewsHandler;
@@ -57,15 +62,14 @@ class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
 
     public class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView mTitle;
-        TextView mSection;
-        TextView mDate;
+        @BindView(R.id.article_title) TextView mTitle;
+        @BindView(R.id.article_section) TextView mSection;
+        @BindView(R.id.article_date) TextView mDate;
+
 
         public NewsHolder(View itemView) {
             super(itemView);
-            mTitle  = (TextView)itemView.findViewById(R.id.article_title);
-            mSection  = (TextView)itemView.findViewById(R.id.article_section);
-            mDate  = (TextView)itemView.findViewById(R.id.article_date);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 

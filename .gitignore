@@ -6,4 +6,5 @@
 .DS_Store
 /build
 /captures
-.externalNativeBuild
+.externalNativeBuild'
+/app/src/main/res/xml/guardian_api_key.xml
